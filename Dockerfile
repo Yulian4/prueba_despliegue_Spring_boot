@@ -1,4 +1,4 @@
-# 1️⃣ Etapa de build con Maven incluido
+# Etapa de build con Maven incluido
 FROM maven:3.9.3-eclipse-temurin-17 AS build
 
 WORKDIR /app
@@ -10,7 +10,7 @@ COPY src ./src
 # Compilamos y empaquetamos el JAR (sin tests)
 RUN mvn clean package -DskipTests
 
-# 2️⃣ Etapa final con JRE 17 para correr la app
+# Etapa final con JRE 17 para correr la app
 FROM eclipse-temurin:17-jre-alpine
 
 WORKDIR /app

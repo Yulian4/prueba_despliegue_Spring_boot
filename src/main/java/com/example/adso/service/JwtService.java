@@ -34,8 +34,15 @@ public class JwtService {
 
     // Genera un token JWT para un usuario
     public String generateToken(UserDetails userDetails) {
-        return generateToken(new HashMap<>(), userDetails);
+        Map<String, Object> extraClaims = new HashMap<>();
+        // Convertimos las autoridades a lista de strings
+        extraClaims.put("roles", userDetails.getAuthorities()
+                            .stream()
+                            .map(auth -> auth.getAuthority())
+                            .toList());
+        return generateToken(extraClaims, userDetails);
     }
+
 
     // Genera un token JWT con "claims" adicionales
     public String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
